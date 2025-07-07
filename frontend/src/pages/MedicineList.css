@@ -1,0 +1,115 @@
+.medicine-list-container {
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.category-filter select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.medicines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.medicine-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  background-color: white;
+}
+
+.medicine-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.medicine-image {
+  height: 180px;
+  overflow: hidden;
+}
+
+.medicine-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.medicine-info {
+  padding: 15px;
+}
+
+.medicine-info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.medicine-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.medicine-price-stock {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-weight: bold;
+  color: #2a9d8f;
+}
+
+.stock {
+  font-size: 0.8rem;
+}
+
+.in-stock {
+  color: #2a9d8f;
+}
+
+.low-stock {
+  color: #e76f51;
+}
+
+.medicine-prescription {
+  font-size: 0.8rem;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.prescription-required {
+  color: #e63946;
+  font-weight: bold;
+}
+
+.no-prescription {
+  color: #2a9d8f;
+}
+
+.loading, .error, .no-results {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+} 

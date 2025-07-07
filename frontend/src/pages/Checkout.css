@@ -1,0 +1,257 @@
+.checkout-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.checkout-container h1 {
+  margin-bottom: 20px;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkout-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.checkout-section h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.no-addresses,
+.no-prescriptions {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.add-address-button,
+.add-prescription-button {
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.address-option,
+.prescription-option {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.address-option input,
+.prescription-option input {
+  margin-right: 10px;
+}
+
+.address-details p,
+.prescription-details p {
+  margin: 5px 0;
+}
+
+.prescription-filename {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.delivery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.delivery-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.delivery-option input {
+  margin-right: 10px;
+}
+
+.delivery-option-details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.delivery-name {
+  font-weight: bold;
+}
+
+.delivery-time {
+  color: #666;
+}
+
+.delivery-fee {
+  font-weight: bold;
+  color: #2a9d8f;
+}
+
+.estimated-delivery {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.estimated-delivery span {
+  font-weight: bold;
+  color: #2a9d8f;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.payment-method input {
+  margin-right: 10px;
+}
+
+.order-summary {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 20px;
+  align-self: start;
+}
+
+.order-summary h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.order-items {
+  margin-bottom: 20px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-name-qty {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-weight: bold;
+}
+
+.item-qty {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.item-price {
+  font-weight: bold;
+}
+
+.order-totals {
+  margin-bottom: 20px;
+}
+
+.subtotal,
+.delivery-fee,
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.place-order-button {
+  width: 100%;
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.place-order-button:hover {
+  background-color: #1e8a7e;
+}
+
+.place-order-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.message.error {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.loading,
+.error,
+.empty-checkout {
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+} 

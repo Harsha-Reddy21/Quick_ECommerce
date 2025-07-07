@@ -1,0 +1,267 @@
+.order-detail-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.order-success-message {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.order-success-message h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #2e7d32;
+}
+
+.order-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .order-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .order-detail-date {
+    margin-top: 10px;
+  }
+}
+
+.order-detail-id {
+  display: flex;
+  align-items: center;
+}
+
+.order-detail-id h1 {
+  margin: 0;
+  margin-right: 15px;
+}
+
+.order-detail-status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.status-pending {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.status-processing {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-out-for-delivery {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-delivered {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-cancelled {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.order-detail-date {
+  color: #666;
+}
+
+.order-detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .order-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.order-detail-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.order-detail-section h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.order-detail-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.order-detail-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-details h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.item-price {
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.prescription-required-tag {
+  display: inline-block;
+  background-color: #ffebee;
+  color: #c62828;
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.item-subtotal {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.delivery-tracking {
+  background-color: #f5f5f5;
+}
+
+.delivery-partner-info {
+  margin-bottom: 15px;
+}
+
+.partner-name,
+.partner-contact {
+  margin-bottom: 5px;
+}
+
+.partner-name span,
+.partner-contact span,
+.estimated-delivery span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.estimated-delivery {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #e8f5e9;
+  border-radius: 4px;
+}
+
+.tracking-map {
+  height: 200px;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.order-summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-row.total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.delivery-address p {
+  margin: 5px 0;
+}
+
+.cancel-order-button {
+  width: 100%;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-order-button:hover {
+  background-color: #d32f2f;
+}
+
+.back-to-orders-button {
+  width: 100%;
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-to-orders-button:hover {
+  background-color: #e0e0e0;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+} 

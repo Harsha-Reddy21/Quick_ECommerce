@@ -1,0 +1,171 @@
+.medicine-detail-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.medicine-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .medicine-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.medicine-image-container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.medicine-detail-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.medicine-detail-info {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.medicine-detail-info h1 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.medicine-category {
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.medicine-category span {
+  font-weight: bold;
+  color: #333;
+}
+
+.medicine-price-detail {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2a9d8f;
+  margin-bottom: 10px;
+}
+
+.medicine-stock-detail {
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+.medicine-stock-detail.in-stock {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.medicine-stock-detail.low-stock {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.prescription-warning {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.prescription-warning i {
+  margin-right: 10px;
+}
+
+.medicine-description-detail,
+.medicine-dosage,
+.medicine-side-effects {
+  margin-bottom: 20px;
+}
+
+.medicine-description-detail h3,
+.medicine-dosage h3,
+.medicine-side-effects h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.add-to-cart-section {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.quantity-selector {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.quantity-selector label {
+  margin-right: 10px;
+}
+
+.quantity-selector input {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.add-to-cart-button {
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: #1e8a7e;
+}
+
+.add-to-cart-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.message.error {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+} 
