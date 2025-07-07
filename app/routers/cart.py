@@ -5,7 +5,7 @@ from datetime import datetime
 
 from app.database.database import get_db
 from app.models.models import Cart, CartItem, Medicine, Prescription, User
-from app.schemas.cart_schemas import Cart as CartSchema, CartItemCreate, CartItem as CartItemSchema, CartItemUpdate, PrescriptionValidation
+from app.schemas.cart_schemas import Cart as CartSchema, CartItemCreate, CartItem as CartItemSchema, CartUpdateItem, PrescriptionValidation
 from app.utils.auth import get_current_active_user
 
 router = APIRouter()
@@ -118,7 +118,7 @@ def add_medicine_to_cart(
 @router.put("/items/{item_id}", response_model=CartItemSchema)
 def update_cart_item(
     item_id: int,
-    item_update: CartItemUpdate,
+    item_update: CartUpdateItem,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):

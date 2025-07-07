@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 from app.database.database import get_db
 from app.models.models import Prescription, PrescriptionMedicine, Medicine
-from app.schemas.prescription_schemas import Prescription as PrescriptionSchema, PrescriptionVerify, PrescriptionMedicine as PrescriptionMedicineSchema, PrescriptionMedicineCreate
+from app.schemas.prescription_schemas import Prescription as PrescriptionSchema, PrescriptionUpdate, PrescriptionMedicine as PrescriptionMedicineSchema, PrescriptionMedicineCreate
 from app.utils.auth import get_current_active_user, get_pharmacy_admin
 from app.models.models import User
 from app.utils.file_upload import save_prescription
@@ -70,7 +70,7 @@ def get_prescription(
 @router.put("/{prescription_id}/verify", response_model=PrescriptionSchema)
 def verify_prescription(
     prescription_id: int,
-    verification: PrescriptionVerify,
+    verification: PrescriptionUpdate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_pharmacy_admin)
 ):

@@ -11,13 +11,16 @@ class OrderItemBase(BaseModel):
     unit_price: float
     prescription_id: Optional[int] = None
 
+class OrderItemCreate(OrderItemBase):
+    pass
+
 class OrderItem(OrderItemBase):
     id: int
     order_id: int
     medicine: Medicine
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Order Tracking Schemas
 class OrderTrackingBase(BaseModel):
@@ -26,7 +29,8 @@ class OrderTrackingBase(BaseModel):
     notes: Optional[str] = None
 
 class OrderTrackingCreate(OrderTrackingBase):
-    pass
+    order_id: int
+    updated_by: int
 
 class OrderTracking(OrderTrackingBase):
     id: int
@@ -35,7 +39,7 @@ class OrderTracking(OrderTrackingBase):
     updated_by: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Order Schemas
 class OrderBase(BaseModel):
@@ -45,14 +49,6 @@ class OrderBase(BaseModel):
 
 class OrderCreate(OrderBase):
     pass
-
-class OrderStatusUpdate(BaseModel):
-    status: str
-    notes: Optional[str] = None
-
-class DeliveryProof(BaseModel):
-    image_path: str
-    delivery_notes: Optional[str] = None
 
 class Order(OrderBase):
     id: int
@@ -65,18 +61,36 @@ class Order(OrderBase):
     updated_at: datetime
     estimated_delivery_time: Optional[datetime] = None
     actual_delivery_time: Optional[datetime] = None
-    address: Address
     items: List[OrderItem] = []
     tracking_updates: List[OrderTracking] = []
+    address: Address
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
-# Delivery Estimate
+# Order Status Update Schema
+class OrderStatusUpdate(BaseModel):
+    status: str
+    notes: Optional[str] = None
+
+# Emergency Delivery Schema
+class EmergencyDelivery(BaseModel):
+    address_id: int
+    medicine_ids: List[int]
+    payment_method: str
+    notes: Optional[str] = None
+
+# Delivery Proof Schema
+class DeliveryProof(BaseModel):
+    image_path: str
+    delivery_notes: Optional[str] = None
+
+# Delivery Estimate Schema
 class DeliveryEstimate(BaseModel):
     address_id: int
     is_emergency: bool = False
 
+# Delivery Estimate Response Schema
 class DeliveryEstimateResponse(BaseModel):
     estimated_minutes: int
     estimated_delivery_time: datetime 

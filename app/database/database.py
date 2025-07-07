@@ -7,11 +7,15 @@ import os
 # Load environment variables
 load_dotenv()
 
-# Database URL - Using SQLite instead of PostgreSQL
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./quickcommerce.db")
+# Database URL - Using PostgreSQL
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:password@localhost:5432/quickcommerce")
+
+# Handle Render's PostgreSQL URL format (starts with postgres://)
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 # Create SQLAlchemy engine
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(DATABASE_URL)
 
 # Create SessionLocal class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

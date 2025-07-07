@@ -40,11 +40,25 @@ pip install -r requirements.txt
 4. Set up PostgreSQL database:
 
 ```bash
+# Install PostgreSQL if not already installed
 # Create a database named 'quickcommerce'
-# Update .env file with your database credentials if needed
+createdb quickcommerce  # If you have PostgreSQL CLI tools installed
+
+# Or using SQL:
+# psql -U postgres
+# CREATE DATABASE quickcommerce;
+# \q
+
+# Update .env file with your database credentials
 ```
 
-5. Initialize the database:
+5. Check database connection:
+
+```bash
+python check_db_connection.py
+```
+
+6. Initialize the database:
 
 ```bash
 python create_tables.py

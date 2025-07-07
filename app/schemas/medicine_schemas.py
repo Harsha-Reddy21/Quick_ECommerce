@@ -12,9 +12,10 @@ class CategoryCreate(CategoryBase):
 
 class Category(CategoryBase):
     id: int
+    created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Medicine Schemas
 class MedicineBase(BaseModel):
@@ -50,7 +51,7 @@ class Medicine(MedicineBase):
     category: Category
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Medicine Search Query Params
 class MedicineSearchParams(BaseModel):

@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 # Import routers
 from app.routers import auth, medicines, categories, prescriptions, cart, orders, delivery
@@ -11,10 +12,13 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Get frontend URL from environment variable or use default for development
+frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=[frontend_url, "https://quick-ecommerce-frontend.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -15,5 +15,7 @@ def create_tables():
         db.close()
 
 if __name__ == "__main__":
+    print("Creating database tables...")
     create_tables()
-    print("Database tables created and initialized with sample data.") 
+    print("Database tables created successfully!")
+    print("Sample data initialized!") 

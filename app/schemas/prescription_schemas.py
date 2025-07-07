@@ -16,17 +16,19 @@ class PrescriptionMedicine(PrescriptionMedicineBase):
     prescription_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Prescription Schemas
 class PrescriptionBase(BaseModel):
     user_id: int
 
-class PrescriptionCreate(BaseModel):
-    pass  # No fields needed as it's created from uploaded image
+class PrescriptionCreate(PrescriptionBase):
+    image_path: str
+    prescription_medicines: Optional[List[PrescriptionMedicineCreate]] = None
 
-class PrescriptionVerify(BaseModel):
-    is_verified: bool = True
+class PrescriptionUpdate(BaseModel):
+    is_verified: bool
+    verified_by: int
     expires_at: Optional[datetime] = None
 
 class Prescription(PrescriptionBase):
@@ -39,4 +41,4 @@ class Prescription(PrescriptionBase):
     prescription_medicines: List[PrescriptionMedicine] = []
 
     class Config:
-        orm_mode = True 
+        from_attributes = True 

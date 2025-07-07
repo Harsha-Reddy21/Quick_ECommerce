@@ -35,7 +35,7 @@ class Address(AddressBase):
     user_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # User Response Schema
 class User(UserBase):
@@ -47,12 +47,12 @@ class User(UserBase):
     addresses: List[Address] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Phone Verification Schema
 class PhoneVerification(BaseModel):
     phone: str
-    code: str
+    verification_code: str
 
 # Token Schema
 class Token(BaseModel):

@@ -12,16 +12,13 @@ class CartItemBase(BaseModel):
 class CartItemCreate(CartItemBase):
     pass
 
-class CartItemUpdate(BaseModel):
-    quantity: int
-
 class CartItem(CartItemBase):
     id: int
     cart_id: int
     medicine: Medicine
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Cart Schemas
 class CartBase(BaseModel):
@@ -38,7 +35,18 @@ class Cart(CartBase):
     total: Optional[float] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+# Cart Add Item Schema
+class CartAddItem(BaseModel):
+    medicine_id: int
+    quantity: int = 1
+    prescription_id: Optional[int] = None
+
+# Cart Update Item Schema
+class CartUpdateItem(BaseModel):
+    item_id: int
+    quantity: int
 
 # Prescription Validation
 class PrescriptionValidation(BaseModel):
