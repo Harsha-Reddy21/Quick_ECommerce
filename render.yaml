@@ -1,5 +1,5 @@
 services:
-  # A Docker web service
+  # Backend API service
   - type: web
     name: quick-ecommerce-api
     env: docker
@@ -17,6 +17,17 @@ services:
         value: 1440
       - key: FRONTEND_URL
         value: https://quick-ecommerce-frontend.onrender.com
+
+  # Frontend React service
+  - type: web
+    name: quick-ecommerce-frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    plan: free
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://quick-ecommerce-api.onrender.com
 
 databases:
   - name: quick-ecommerce-db
