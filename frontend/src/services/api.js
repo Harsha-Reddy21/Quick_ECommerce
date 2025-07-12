@@ -4,6 +4,11 @@ import config from '../config';
 // Create axios instance with base URL
 const api = axios.create({
   baseURL: config.API_URL,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
 });
 
 // Request interceptor to add auth token

@@ -25,10 +25,11 @@ frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_url, "https://quick-ecommerce-frontend.onrender.com"],
+    allow_origins=["*"],  # Allow all origins during development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 # Include routers
