@@ -1,14 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
+from dotenv import load_dotenv
 
 # Import routers
 from app.routers import auth, medicines, categories, prescriptions, cart, orders, delivery
 
+# Import Supabase client
+from app.database.supabase_client import db_service
+
+# Load environment variables
+load_dotenv()
+
 # Create FastAPI instance
 app = FastAPI(
     title="Quick Commerce Medicine Delivery API",
-    description="API for a medicine delivery platform with quick commerce features",
+    description="API for a medicine delivery platform with quick commerce features using Supabase",
     version="1.0.0"
 )
 
@@ -35,7 +42,30 @@ app.include_router(delivery.router, prefix="/delivery", tags=["Delivery"])
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to Quick Commerce Medicine Delivery API"}
+    return {
+        "message": "Welcome to Quick Commerce Medicine Delivery API",
+        "database": "Supabase",
+        "status": "Connected",
+        "project_url": os.getenv("SUPABASE_URL")
+    }
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint to verify database connectivity"""
+    try:
+        # Test database connection
+        response = db_service.get_client().table("users").select("count").execute()
+        return {
+            "status": "healthy",
+            "database": "connected",
+            "supabase_project": os.getenv("SUPABASE_URL")
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "error": str(e),
+            "database": "disconnected"
+        }
 
 if __name__ == "__main__":
     import uvicorn

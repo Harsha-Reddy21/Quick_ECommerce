@@ -4,9 +4,7 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
-from app.database.database import get_db
-from app.models.models import User
+from app.database.supabase_client import db_service
 from app.schemas.user_schemas import TokenData
 import os
 from dotenv import load_dotenv
@@ -44,20 +42,20 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-def get_user_by_email(db: Session, email: str):
+def get_user_by_email(email: str):
     """Get user by email"""
-    return db.query(User).filter(User.email == email).first()
+    return db_service.get_user_by_email(email)
 
-def authenticate_user(db: Session, email: str, password: str):
+def authenticate_user(email: str, password: str):
     """Authenticate user with email and password"""
-    user = get_user_by_email(db, email)
+    user = get_user_by_email(email)
     if not user:
         return False
-    if not verify_password(password, user.hashed_password):
+    if not verify_password(password, user["hashed_password"]):
         return False
     return user
 
-async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+async def get_current_user(token: str = Depends(oauth2_scheme)):
     """Get current user from JWT token"""
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -72,29 +70,29 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         token_data = TokenData(email=email)
     except JWTError:
         raise credentials_exception
-    user = get_user_by_email(db, email=token_data.email)
+    user = get_user_by_email(email=token_data.email)
     if user is None:
         raise credentials_exception
     return user
 
-async def get_current_active_user(current_user: User = Depends(get_current_user)):
+async def get_current_active_user(current_user = Depends(get_current_user)):
     """Get current active user"""
-    if not current_user.is_active:
+    if not current_user["is_active"]:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
-async def get_pharmacy_admin(current_user: User = Depends(get_current_user)):
+async def get_pharmacy_admin(current_user = Depends(get_current_user)):
     """Check if user is pharmacy admin"""
-    if not current_user.is_pharmacy_admin:
+    if not current_user["is_pharmacy_admin"]:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not authorized as pharmacy admin"
         )
     return current_user
 
-async def get_delivery_partner(current_user: User = Depends(get_current_user)):
+async def get_delivery_partner(current_user = Depends(get_current_user)):
     """Check if user is delivery partner"""
-    if not current_user.is_delivery_partner:
+    if not current_user["is_delivery_partner"]:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not authorized as delivery partner"

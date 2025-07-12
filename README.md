@@ -1,10 +1,10 @@
 # Quick Commerce Medicine Delivery API
 
-A FastAPI-based backend for a quick commerce medicine delivery platform with user authentication, medicine catalog management, prescription handling, and rapid delivery functionality.
+A FastAPI-based backend for a quick commerce medicine delivery platform with user authentication, medicine catalog management, prescription handling, and rapid delivery functionality. The application uses Supabase for data storage and authentication.
 
 ## Features
 
-- User authentication and medical profiles
+- User authentication and medical profiles using Supabase Auth
 - Medicine catalog with search, filtering, and categorization
 - Prescription upload, verification, and management
 - Shopping cart with prescription validation
@@ -37,32 +37,28 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Set up PostgreSQL database:
+4. Set up Supabase:
 
-```bash
-# Install PostgreSQL if not already installed
-# Create a database named 'quickcommerce'
-createdb quickcommerce  # If you have PostgreSQL CLI tools installed
+- Create a Supabase account at https://supabase.com
+- Create a new project
+- Get your project URL and anon key from the project settings
+- Create a `.env` file in the project root with the following content:
 
-# Or using SQL:
-# psql -U postgres
-# CREATE DATABASE quickcommerce;
-# \q
-
-# Update .env file with your database credentials
+```env
+SUPABASE_URL=your_project_url
+SUPABASE_ANON_KEY=your_anon_key
 ```
 
-5. Check database connection:
+5. Initialize Supabase tables:
 
-```bash
-python check_db_connection.py
-```
-
-6. Initialize the database:
-
-```bash
-python create_tables.py
-```
+The following tables will be automatically created in your Supabase project:
+- users
+- medicines
+- categories
+- prescriptions
+- cart_items
+- orders
+- delivery_partners
 
 ## Running the Application
 
@@ -82,7 +78,7 @@ API documentation will be available at:
 
 ### Authentication & Users:
 - POST /auth/register - Register new user with medical profile
-- POST /auth/login - User login
+- POST /auth/login - User login using Supabase Auth
 - GET /auth/me - Get current user profile
 - PUT /auth/profile - Update user profile
 - POST /auth/verify-phone - Verify phone number for delivery
@@ -133,6 +129,8 @@ API documentation will be available at:
 
 ## Default Users
 
+Note: Default users need to be created through Supabase Auth dashboard or using the registration endpoint:
+
 - Admin User:
   - Email: admin@quickcommerce.com
   - Password: admin123
@@ -140,3 +138,10 @@ API documentation will be available at:
 - Delivery Partner:
   - Email: delivery@quickcommerce.com
   - Password: delivery123
+
+## Development Notes
+
+- The application uses Supabase for data storage and authentication
+- Real-time features are implemented using Supabase's real-time subscriptions
+- File storage (prescriptions, delivery proofs) uses Supabase Storage
+- For local development, make sure your `.env` file contains the correct Supabase credentials
