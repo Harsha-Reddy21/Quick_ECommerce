@@ -13,3 +13,4 @@ email-validator
 starlette
 typing-extensions
 cryptography
+supabase
