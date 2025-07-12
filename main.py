@@ -21,18 +21,13 @@ app = FastAPI(
 
 # Get frontend URL from environment variable or use default for development
 frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
-allowed_origins = [
-    frontend_url,
-    "https://quick-ecommerce-2.onrender.com",  # Production frontend URL
-    "http://localhost:3000",  # Local development frontend
-]
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=[frontend_url],  # Only allow the frontend URL
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
     expose_headers=["*"]
 )
