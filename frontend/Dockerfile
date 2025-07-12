@@ -28,20 +28,12 @@ COPY --from=build /app/build /usr/share/nginx/html
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Create a shell script to handle environment variables at runtime
-RUN echo $'\n\
-#!/bin/sh\n\
-\n\
-# Replace environment variables in the built files\n\
-find /usr/share/nginx/html -type f -exec sed -i "s|REACT_APP_API_URL_PLACEHOLDER|$REACT_APP_API_URL|g" {} +\n\
-\n\
-# Start nginx\n\
-nginx -g "daemon off;"\n\
-' > /docker-entrypoint.sh \
-&& chmod +x /docker-entrypoint.sh
+# Create entrypoint script
+RUN printf '#!/bin/sh\nfind /usr/share/nginx/html -type f -exec sed -i "s|REACT_APP_API_URL_PLACEHOLDER|$REACT_APP_API_URL|g" {} +\nnginx -g "daemon off;"\n' > /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
 
 # Expose port
 EXPOSE 80
 
 # Start nginx using our entrypoint script
-CMD ["/docker-entrypoint.sh"] 
+ENTRYPOINT ["/docker-entrypoint.sh"] 
