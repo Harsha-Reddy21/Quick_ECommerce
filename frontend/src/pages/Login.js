@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import './Login.css';
 
@@ -10,6 +10,7 @@ const Login = () => {
   
   const { login, error } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +21,9 @@ const Login = () => {
     setIsLoading(false);
     
     if (success) {
-      navigate('/');
+      // Navigate to the page they tried to visit or home
+      const from = location.state?.from?.pathname || '/';
+      navigate(from, { replace: true });
     }
   };
 
@@ -65,9 +68,9 @@ const Login = () => {
           </button>
         </form>
         
-        <div className="login-footer">
-          <p>Don't have an account? <Link to="/register">Register here</Link></p>
-        </div>
+        <p className="register-link">
+          Don't have an account? <Link to="/register">Register here</Link>
+        </p>
       </div>
     </div>
   );

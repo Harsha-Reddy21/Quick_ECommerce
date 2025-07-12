@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import api from '../services/api';
 import './MedicineDetail.css';
 
 const MedicineDetail = () => {
@@ -19,7 +19,7 @@ const MedicineDetail = () => {
   useEffect(() => {
     const fetchMedicine = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/medicines/${id}`);
+        const response = await api.get(`/medicines/${id}`);
         setMedicine(response.data);
         setLoading(false);
       } catch (err) {
@@ -47,17 +47,10 @@ const MedicineDetail = () => {
     setAddingToCart(true);
     
     try {
-      const token = localStorage.getItem('token');
-      await axios.post(
-        'http://localhost:8000/api/cart/add',
-        {
-          medicine_id: medicine.id,
-          quantity: quantity
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      );
+      await api.post('/cart/add', {
+        medicine_id: medicine.id,
+        quantity: quantity
+      });
       
       setMessage({ text: 'Added to cart successfully!', type: 'success' });
       setTimeout(() => setMessage({ text: '', type: '' }), 3000);

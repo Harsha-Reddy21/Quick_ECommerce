@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 // Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import PrivateRoute from './components/PrivateRoute';
 
 // Pages
 import Home from './pages/Home';
@@ -34,12 +35,54 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/medicines" element={<MedicineList />} />
             <Route path="/medicines/:id" element={<MedicineDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/orders/:id" element={<OrderDetail />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/prescriptions" element={<Prescriptions />} />
+            <Route 
+              path="/cart" 
+              element={
+                <PrivateRoute>
+                  <Cart />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/checkout" 
+              element={
+                <PrivateRoute>
+                  <Checkout />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/orders" 
+              element={
+                <PrivateRoute>
+                  <Orders />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/orders/:id" 
+              element={
+                <PrivateRoute>
+                  <OrderDetail />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/prescriptions" 
+              element={
+                <PrivateRoute>
+                  <Prescriptions />
+                </PrivateRoute>
+              } 
+            />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

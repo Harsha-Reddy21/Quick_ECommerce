@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import api from '../services/api';
 import './Prescriptions.css';
 
 const Prescriptions = () => {
@@ -26,11 +26,7 @@ const Prescriptions = () => {
 
   const fetchPrescriptions = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/prescriptions', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      
+      const response = await api.get('/prescriptions');
       setPrescriptions(response.data);
       setLoading(false);
     } catch (err) {
@@ -54,20 +50,12 @@ const Prescriptions = () => {
     setUploadingFile(true);
     
     try {
-      const token = localStorage.getItem('token');
       const formData = new FormData();
       formData.append('prescription_file', selectedFile);
       
-      await axios.post(
-        'http://localhost:8000/api/prescriptions/upload',
-        formData,
-        {
-          headers: { 
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-      );
+      await api.post('/prescriptions/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
       
       // Refresh prescriptions list
       fetchPrescriptions();
@@ -94,10 +82,7 @@ const Prescriptions = () => {
 
   const deletePrescription = async (prescriptionId) => {
     try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8000/api/prescriptions/${prescriptionId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await api.delete(`/prescriptions/${prescriptionId}`);
       
       // Update local state
       setPrescriptions(prev => prev.filter(p => p.id !== prescriptionId));

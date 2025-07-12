@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import api from '../services/api';
 import './Cart.css';
 
 const Cart = () => {
@@ -26,11 +26,7 @@ const Cart = () => {
 
   const fetchCartItems = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/cart', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      
+      const response = await api.get('/cart');
       setCartItems(response.data.items);
       setPrescriptionNeeded(response.data.items.some(item => item.requires_prescription));
       setLoading(false);
@@ -46,17 +42,10 @@ const Cart = () => {
     setUpdating(true);
     
     try {
-      const token = localStorage.getItem('token');
-      await axios.put(
-        `http://localhost:8000/api/cart/update`,
-        {
-          cart_item_id: itemId,
-          quantity: newQuantity
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      );
+      await api.put('/cart/update', {
+        cart_item_id: itemId,
+        quantity: newQuantity
+      });
       
       // Update local state
       setCartItems(prevItems => 
@@ -79,10 +68,7 @@ const Cart = () => {
     setUpdating(true);
     
     try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8000/api/cart/remove/${itemId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await api.delete(`/cart/remove/${itemId}`);
       
       // Update local state
       setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));

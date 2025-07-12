@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import api from '../services/api';
 import './Orders.css';
 
 const Orders = () => {
@@ -24,11 +24,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/orders', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      
+      const response = await api.get('/orders');
       setOrders(response.data);
       setLoading(false);
     } catch (err) {

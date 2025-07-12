@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import './MedicineList.css';
 
 const MedicineList = () => {
@@ -14,7 +14,7 @@ const MedicineList = () => {
   useEffect(() => {
     const fetchMedicines = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/medicines');
+        const response = await api.get('/medicines');
         setMedicines(response.data);
         setLoading(false);
       } catch (err) {
@@ -25,7 +25,7 @@ const MedicineList = () => {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/categories');
+        const response = await api.get('/categories');
         setCategories(response.data);
       } catch (err) {
         console.error('Failed to fetch categories', err);
